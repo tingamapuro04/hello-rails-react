@@ -9,13 +9,14 @@ const Greeting = ({ greeting, fetchGreeting }) => {
 
   return (
     <div>
-      <h1>{greeting}</h1>
+      {/* <h1>{greeting}</h1> */}
     </div>
   );
 };
 
-const mapStateToProps = (state) => {
-  return { greeting: state.greeting };
-};
+// const mapStateToProps = (state) => {
+//   // return { greeting: state.greeting };
+//   return <h1>{state.greeting}</h1>
+// };
 
 export default connect(mapStateToProps, { fetchGreeting })(Greeting);
