@@ -11,6 +11,8 @@ gem "sprockets-rails"
 
 gem 'pg', '~> 1.4', '>= 1.4.5'
 
+gem 'rubocop', '>= 1.0', '< 2.0'
+
 # Use sqlite3 as the database for Active Record
 # gem "sqlite3", "~> 1.4"
 
