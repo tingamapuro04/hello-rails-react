@@ -1,6 +1,24 @@
-export const fetchGreeting = () => async (dispatch) => {
-  const response = await fetch("/api/messages/random_message");
-  const data = await response.json();
+export const FETCH_GREETING_REQUEST = "FETCH_GREETING_REQUEST";
+export const FETCH_GREETING_SUCCESS = "FETCH_GREETING_SUCCESS";
+export const FETCH_GREETING_FAILURE = "FETCH_GREETING_FAILURE";
 
-  dispatch({ type: "FETCH_GREETING", payload: data.greeting });
+export const fetchGreeting = () => {
+  return (dispatch) => {
+    dispatch({ type: FETCH_GREETING_REQUEST });
+
+    return fetch("/api/messages/random_message")
+      .then((response) => response.json())
+      .then((data) =>
+        dispatch({
+          type: FETCH_GREETING_SUCCESS,
+          payload: data.message,
+        })
+      )
+      .catch((error) =>
+        dispatch({
+          type: FETCH_GREETING_FAILURE,
+          payload: error.message,
+        })
+      );
+  };
 };

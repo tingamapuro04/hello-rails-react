@@ -1,22 +1,22 @@
 import React, { useEffect } from "react";
-import { connect } from "react-redux";
-import { fetchGreeting } from "../actions";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchGreeting } from "../actions/index";
 
-const Greeting = ({ greeting, fetchGreeting }) => {
+const Greeting = () => {
+  const dispatch = useDispatch();
+  const { message, loading, error } = useSelector((state) => state.greeting);
+
   useEffect(() => {
-    fetchGreeting();
-  }, []);
+    dispatch(fetchGreeting());
+  }, [dispatch]);
 
   return (
     <div>
-      {/* <h1>{greeting}</h1> */}
+      {loading && <p>Loading...</p>}
+      {error && <p>{error}</p>}
+      {message && <p>{message}</p>}
     </div>
   );
 };
 
-// const mapStateToProps = (state) => {
-//   // return { greeting: state.greeting };
-//   return <h1>{state.greeting}</h1>
-// };
-
-export default connect(mapStateToProps, { fetchGreeting })(Greeting);
+export default Greeting;
